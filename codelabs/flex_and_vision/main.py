@@ -15,9 +15,9 @@
 from datetime import datetime
 import logging
 import os
-
+import base64
 from flask import Flask, redirect, render_template, request
-
+from io import BytesIO
 from google.cloud import datastore
 from google.cloud import storage
 from google.cloud import vision
@@ -45,7 +45,12 @@ def homepage():
 
 @app.route('/upload_photo', methods=['GET', 'POST'])
 def upload_photo():
-    photo = request.files['file']
+ 
+    image_data = request.data
+    count = 1
+    path = "upload" + count + ".png"
+    with open(path, "wb") as fh:
+        fh.write(image_data.decode('base64'))
 
     # Create a Cloud Storage client.
     storage_client = storage.Client()
@@ -54,13 +59,14 @@ def upload_photo():
     bucket = storage_client.get_bucket(CLOUD_STORAGE_BUCKET)
 
     # Create a new blob and upload the file's content.
-    blob = bucket.blob(photo.filename)
-    blob.upload_from_string(
-            photo.read(), content_type=photo.content_type)
+    blob = bucket.blob(path)
+    blog.upload_from_filename(path)
+   
 
     # Make the blob publicly viewable.
     blob.make_public()
 
+    
     # Create a Cloud Vision client.
     vision_client = vision.ImageAnnotatorClient()
 
