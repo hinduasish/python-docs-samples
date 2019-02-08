@@ -73,7 +73,7 @@ def upload_photo():
     response = vision_client.label_detection(image=image)
     labels = response.label_annotations
     if len(labels) > 0:
-        label = labels[0]
+        label = labels[0].description
 
 
     # If a face is detected, save to Datastore the likelihood that the face
