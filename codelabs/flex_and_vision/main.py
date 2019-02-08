@@ -70,6 +70,12 @@ def upload_photo():
         source=vision.types.ImageSource(gcs_image_uri=source_uri))
     faces = vision_client.face_detection(image).face_annotations
 
+    response = client.label_detection(image=image)
+    labels = response.label_annotations
+    if len(labels) > 0:
+        label = labels[0]
+
+
     # If a face is detected, save to Datastore the likelihood that the face
     # displays 'joy,' as determined by Google's Machine Learning algorithm.
     if len(faces) > 0:
@@ -105,7 +111,7 @@ def upload_photo():
     entity['image_public_url'] = blob.public_url
     entity['timestamp'] = current_datetime
     entity['joy'] = face_joy
-    entity['yo'] = 'yo'
+    entity['yo'] = label
 
     # Save the new entity to Datastore.
     datastore_client.put(entity)
