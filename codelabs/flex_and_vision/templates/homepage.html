@@ -6,6 +6,286 @@ Storage, Datastore, and the Cloud Vision API.</p>
 <br>
 
 <html>
+  <head>
+      <link href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet" type="text/css">
+   <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
+
+
+
+    <style>
+    
+        /*
+ *  Copyright (c) 2015 The WebRTC project authors. All Rights Reserved.
+ *
+ *  Use of this source code is governed by a BSD-style license
+ *  that can be found in the LICENSE file in the root of the source
+ *  tree.
+ */
+.hidden {
+  display: none;
+}
+
+.highlight {
+  background-color: #eee;
+  font-size: 1.2em;
+  margin: 0 0 30px 0;
+  padding: 0.2em 1.5em;
+}
+
+.warning {
+  color: red;
+  font-weight: 400;
+}
+
+@media screen and (min-width: 1000px) {
+  /* hack! to detect non-touch devices */
+  div#links a {
+    line-height: 0.8em;
+  }
+}
+
+audio {
+  max-width: 100%;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  margin: 0;
+  padding: 1em;
+  word-break: break-word;
+}
+
+button {
+  background-color: #d84a38;
+  border: none;
+  border-radius: 2px;
+  color: white;
+  font-family: 'Roboto', sans-serif;
+  font-size: 0.8em;
+  margin: 0 0 1em 0;
+  padding: 0.5em 0.7em 0.6em 0.7em;
+}
+
+button:active {
+  background-color: #cf402f;
+}
+
+button:hover {
+  background-color: #cf402f;
+}
+
+button[disabled] {
+  color: #ccc;
+}
+
+button[disabled]:hover {
+  background-color: #d84a38;
+}
+
+canvas {
+  background-color: #ccc;
+  max-width: 100%;
+  width: 100%;
+}
+
+code {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+}
+
+div#container {
+  margin: 0 auto 0 auto;
+  max-width: 60em;
+  padding: 1em 1.5em 1.3em 1.5em;
+}
+
+div#links {
+  padding: 0.5em 0 0 0;
+}
+
+h1 {
+  border-bottom: 1px solid #ccc;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  margin: 0 0 0.8em 0;
+  padding: 0 0 0.2em 0;
+}
+
+h2 {
+  color: #444;
+  font-weight: 500;
+}
+
+h3 {
+  border-top: 1px solid #eee;
+  color: #666;
+  font-weight: 500;
+  margin: 10px 0 10px 0;
+  white-space: nowrap;
+}
+
+li {
+  margin: 0 0 0.4em 0;
+}
+
+html {
+  /* avoid annoying page width change
+  when moving from the home page */
+  overflow-y: scroll;
+}
+
+img {
+  border: none;
+  max-width: 100%;
+}
+
+input[type=radio] {
+  position: relative;
+  top: -1px;
+}
+
+p {
+  color: #444;
+  font-weight: 300;
+}
+
+p#data {
+  border-top: 1px dotted #666;
+  font-family: Courier New, monospace;
+  line-height: 1.3em;
+  max-height: 1000px;
+  overflow-y: auto;
+  padding: 1em 0 0 0;
+}
+
+p.borderBelow {
+  border-bottom: 1px solid #aaa;
+  padding: 0 0 20px 0;
+}
+
+section p:last-of-type {
+  margin: 0;
+}
+
+section {
+  border-bottom: 1px solid #eee;
+  margin: 0 0 30px 0;
+  padding: 0 0 20px 0;
+}
+
+section:last-of-type {
+  border-bottom: none;
+  padding: 0 0 1em 0;
+}
+
+select {
+  margin: 0 1em 1em 0;
+  position: relative;
+  top: -1px;
+}
+
+h1 span {
+  white-space: nowrap;
+}
+
+a {
+  color: #6fa8dc;
+  font-weight: 300;
+  text-decoration: none;
+}
+
+h1 a {
+  font-weight: 300;
+  margin: 0 10px 0 0;
+  white-space: nowrap;
+}
+
+a:hover {
+  color: #3d85c6;
+  text-decoration: underline;
+}
+
+a#viewSource {
+  display: block;
+  margin: 1.3em 0 0 0;
+  border-top: 1px solid #999;
+  padding: 1em 0 0 0;
+}
+
+div#errorMsg p {
+  color: #F00;
+}
+
+div#links a {
+  display: block;
+  line-height: 1.3em;
+  margin: 0 0 1.5em 0;
+}
+
+div.outputSelector {
+  margin: -1.3em 0 2em 0;
+}
+
+p.description {
+  margin: 0 0 0.5em 0;
+}
+
+strong {
+  font-weight: 500;
+}
+
+textarea {
+  resize: none;
+  font-family: 'Roboto', sans-serif;
+}
+
+video {
+  background: #222;
+  margin: 0 0 20px 0;
+  --width: 100%;
+  width: var(--width);
+  height: calc(var(--width) * 0.75);
+}
+
+ul {
+  margin: 0 0 0.5em 0;
+}
+
+@media screen and (max-width: 650px) {
+  .highlight {
+    font-size: 1em;
+    margin: 0 0 20px 0;
+    padding: 0.2em 1em;
+  }
+
+  h1 {
+    font-size: 24px;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  button:active {
+    background-color: darkRed;
+  }
+
+  h1 {
+    font-size: 22px;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  h1 {
+    font-size: 20px;
+  }
+}
+
+
+
+</style>
+  </head>
+
+
   <body>
     <form action="upload_photo" method="POST" enctype="multipart/form-data">
       Upload File: <input type="file" name="file"><br>
@@ -17,5 +297,84 @@ Storage, Datastore, and the Cloud Vision API.</p>
       <p>Joy Likelihood for Face: {{image_entity['joy']}}</p>
       <p>Joy Likelihood for Face: {{image_entity['yo']}}</p>
     {% endfor %}
+
+
+<div id="container">
+
+    <h1><a href="//webrtc.github.io/samples/" title="WebRTC samples homepage">WebRTC samples</a> <span>getUserMedia ⇒ canvas</span>
+    </h1>
+
+    <video playsinline autoplay></video>
+    <button>Take snapshot</button>
+    <canvas></canvas>
+
+    <p>Draw a frame from the video onto the canvas element using the <code>drawImage()</code> method.</p>
+
+    <p>The variables <code>canvas</code>, <code>video</code> and <code>stream</code> are in global scope, so you can
+        inspect them from the console.</p>
+
+    <a href="https://github.com/webrtc/samples/tree/gh-pages/src/content/getusermedia/canvas"
+       title="View source for this page on GitHub" id="viewSource">View source on GitHub</a>
+
+</div>
+
+
   </body>
+
+
+<script type="text/javascript">
+    
+
+    /*
+ *  Copyright (c) 2015 The WebRTC project authors. All Rights Reserved.
+ *
+ *  Use of this source code is governed by a BSD-style license
+ *  that can be found in the LICENSE file in the root of the source
+ *  tree.
+ */
+
+'use strict';
+
+// Put variables in global scope to make them available to the browser console.
+const video = document.querySelector('video');
+const canvas = window.canvas = document.querySelector('canvas');
+canvas.width = 480;
+canvas.height = 360;
+
+const button = document.querySelector('button');
+button.onclick = function() {
+  canvas.width = video.videoWidth;
+  canvas.height = video.videoHeight;
+  canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
+};
+
+const constraints = {
+  audio: false,
+  video: true
+};
+
+function handleSuccess(stream) {
+  window.stream = stream; // make stream available to browser console
+  video.srcObject = stream;
+
+
+  setInterval(function(){ 
+
+
+
+    
+    canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
+
+
+  }, 250);
+
+}
+
+function handleError(error) {
+  console.log('navigator.getUserMedia error: ', error);
+}
+
+navigator.mediaDevices.getUserMedia(constraints).then(handleSuccess).catch(handleError);
+
+</script>
 </html> 
