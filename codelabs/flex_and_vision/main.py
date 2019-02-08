@@ -75,7 +75,12 @@ def upload_photo():
     if len(labels) > 0:
         label = labels[0].description
 
+    response = vision_client.logo_detection(image=image)
+    logos = response.logo_annotations
+    if len(logos) > 0:
+        logo = logos[0].description
 
+    
     # If a face is detected, save to Datastore the likelihood that the face
     # displays 'joy,' as determined by Google's Machine Learning algorithm.
     if len(faces) > 0:
@@ -111,7 +116,8 @@ def upload_photo():
     entity['image_public_url'] = blob.public_url
     entity['timestamp'] = current_datetime
     entity['joy'] = face_joy
-    entity['yo'] = label
+    entity['label'] = label
+    entity['logos_detected'] = logo
 
     # Save the new entity to Datastore.
     datastore_client.put(entity)
