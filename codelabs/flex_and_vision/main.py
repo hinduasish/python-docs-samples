@@ -105,6 +105,7 @@ def upload_photo():
     entity['image_public_url'] = blob.public_url
     entity['timestamp'] = current_datetime
     entity['joy'] = face_joy
+    entity['yo'] = 'yo'
 
     # Save the new entity to Datastore.
     datastore_client.put(entity)
