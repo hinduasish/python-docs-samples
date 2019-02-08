@@ -70,7 +70,7 @@ def upload_photo():
         source=vision.types.ImageSource(gcs_image_uri=source_uri))
     faces = vision_client.face_detection(image).face_annotations
 
-    response = vision.client.label_detection(image=image)
+    response = vision_client.label_detection(image=image)
     labels = response.label_annotations
     if len(labels) > 0:
         label = labels[0]
