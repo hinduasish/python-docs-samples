@@ -125,7 +125,7 @@ def upload_photo():
     datastore_client.put(entity)
 
     # Redirect to the home page.
-    count = count+1
+
     return redirect('/')
 
 
