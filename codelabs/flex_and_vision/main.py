@@ -82,7 +82,7 @@ def upload_photo():
     if len(logos) > 0:
         logo = logos[0].description
 
-    response = client.web_detection(image=image)
+    response = vision_client.web_detection(image=image)
     annotations = response.web_detection
 
     if annotations.best_guess_labels:
