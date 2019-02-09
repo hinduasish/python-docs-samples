@@ -79,10 +79,10 @@ def upload_photo():
 
     response = vision_client.logo_detection(image=image)
     logos = response.logo_annotations
-    logo = []
+    logo = ""
     if len(logos) > 0:
-        for logo1 in logos:
-            logo.append(logo1)
+        for i in logos:
+            logo = logo + ", " + i.description
     
     else:
         logo = "No Logos Found"
