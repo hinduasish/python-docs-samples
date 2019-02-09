@@ -48,7 +48,7 @@ def upload_photo():
  
     image_data = request.data
     count = 1
-    path = "upload" + count + ".png"
+    path = "upload" + string(count) + ".png"
     app.logger.info('Info')
     with open(path, "wb") as fh:
         fh.write(image_data.decode('base64'))
@@ -130,6 +130,7 @@ def upload_photo():
     datastore_client.put(entity)
 
     # Redirect to the home page.
+    count = count+1
     return redirect('/')
 
 
