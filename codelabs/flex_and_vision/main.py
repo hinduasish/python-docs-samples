@@ -46,13 +46,7 @@ def homepage():
 @app.route('/upload_photo', methods=['GET', 'POST'])
 def upload_photo():
  
-    image_data = request.data
-    count = 1
-    path = "upload" + str(count) + ".png"
-    app.logger.info('Info')
-    imgdata = base64.b64decode(image_data)
-    with open(path, "wb") as fh:
-        fh.write(imgdata)
+    photo = request.files['file']
 
     # Create a Cloud Storage client.
     storage_client = storage.Client()
@@ -61,14 +55,14 @@ def upload_photo():
     bucket = storage_client.get_bucket(CLOUD_STORAGE_BUCKET)
 
     # Create a new blob and upload the file's content.
-    blob = bucket.blob(path)
-    blog.upload_from_filename(path)
-   
+    blob = bucket.blob(photo.filename)
+    blob.upload_from_string(
+            photo.read(), content_type=photo.content_type)
 
     # Make the blob publicly viewable.
     blob.make_public()
 
-    
+
     # Create a Cloud Vision client.
     vision_client = vision.ImageAnnotatorClient()
 

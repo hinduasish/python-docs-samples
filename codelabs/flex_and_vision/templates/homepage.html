@@ -288,7 +288,7 @@ ul {
 
   <body>
     <form action="upload_photo" method="POST" enctype="multipart/form-data">
-      Upload File: <input type="file" name="file"><br>
+      Upload File: <input type="file" name="file" accept="image/*" ><br>
       <input type="submit" name="submit" value="Submit">
     </form>
     {% for image_entity in image_entities %}
@@ -377,9 +377,9 @@ function handleSuccess(stream) {
                var req = new XMLHttpRequest();
         var result = document.getElementById('result');
        
-        req.open('POST', '/upload_photo', true);
-        req.setRequestHeader('content-type', 'application/x-www-form-urlencoded');
-        req.send(data);
+       // req.open('POST', '/upload_photo', true);
+        //req.setRequestHeader('content-type', 'application/x-www-form-urlencoded');
+        //req.send(data);
     
 
   }, 250);
