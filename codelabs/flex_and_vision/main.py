@@ -84,11 +84,11 @@ def upload_photo():
         for i in logos:
     
             logo = logo + ", " + i.description
-    
+        logo = logo[1:]
     else:
         logo = "No Logos Found"
 
-    logo = [1:]
+    
     response = vision_client.web_detection(image=image)
     annotations = response.web_detection
 
@@ -99,7 +99,7 @@ def upload_photo():
         
         for j in annotations.web_entities:
             label_web_guess = label_web_guess + ", " + j.description
-        label_web_guess = [1:]
+        label_web_guess = label_web_guess[1:]
     else:
         label_web_guess = "No web results found" 
 
