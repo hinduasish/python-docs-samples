@@ -20,7 +20,9 @@ from flask import Flask, redirect, render_template, request
 from io import BytesIO
 from google.cloud import datastore
 from google.cloud import storage
+import random
 from google.cloud import vision
+import string
 
 
 CLOUD_STORAGE_BUCKET = os.environ.get('CLOUD_STORAGE_BUCKET')
@@ -47,7 +49,9 @@ def homepage():
 def upload_photo():
  
     photo = request.files['file']
-
+    
+    random = ''.join([random.choice(string.ascii_letters + string.digits) for n in xrange(5)])
+    new_path = random + photo.filename
     # Create a Cloud Storage client.
     storage_client = storage.Client()
 
@@ -55,7 +59,7 @@ def upload_photo():
     bucket = storage_client.get_bucket(CLOUD_STORAGE_BUCKET)
 
     # Create a new blob and upload the file's content.
-    blob = bucket.blob(photo.filename)
+    blob = bucket.blob(new_path)
     blob.upload_from_string(
             photo.read(), content_type=photo.content_type)
 
