@@ -78,7 +78,7 @@ def upload_photo():
   
     if labels:
         if len(labels) < 5:
-            for j in labels
+            for j in labels:
                 label = label + ", " + j.description
         else:
             for i in range(5):
