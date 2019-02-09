@@ -318,10 +318,9 @@ Storage, Datastore, and the Cloud Vision API.</p>
 
 
  
-
-
+<div  class = "row">
     {% for image_entity in image_entities %}
-      <div class="col-sm-6">
+    
         <div class="card" >
   <img src="{{image_entity['image_public_url']}}" width=300 height=400>
   <div class="card-body">
@@ -338,9 +337,9 @@ Storage, Datastore, and the Cloud Vision API.</p>
     <a href="#" class="card-link">Another link</a>
   </div>
 </div>
-    </div>
+   
     {% endfor %}
-
+</div>
 
     
 
