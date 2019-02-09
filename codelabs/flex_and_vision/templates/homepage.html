@@ -283,6 +283,10 @@ ul {
   width: 500px;
   height: 400px;
   float: left;
+  padding-left: 40px;
+}
+.card{
+  width: 100%;
 }
 
 
@@ -319,7 +323,7 @@ Storage, Datastore, and the Cloud Vision API.</p>
     {% for image_entity in image_entities %}
        <div id="container2">
         <div class="card" style="width: 18rem;">
-  <img src="{{image_entity['image_public_url']}}" width=200 height=200>
+  <img src="{{image_entity['image_public_url']}}" width=400 height=300>
   <div class="card-body">
     <h5 class="card-title">Suggested Web Matches: </h5>
     <p class="card-text">{{image_entity['best_guess']}}</p>
