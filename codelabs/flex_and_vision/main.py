@@ -49,6 +49,7 @@ def upload_photo():
     image_data = request.data
     count = 1
     path = "upload" + count + ".png"
+    app.logger.info('Info')
     with open(path, "wb") as fh:
         fh.write(image_data.decode('base64'))
 
