@@ -133,6 +133,21 @@ def upload_photo():
     else:
         face_joy = 'Unknown'
 
+
+
+    response = vision_client.text_detection(image=image)
+    texts = response.text_annotations
+    text_lifted = ""
+    if texts:
+
+        for text in texts:
+            print('\n"{}"'.format(text.description))
+            text_lifted = text_lifted + " " + text.description
+    else:
+        text_lifted = "No Text Found"
+
+
+
     # Create a Cloud Datastore client.
     datastore_client = datastore.Client()
 
@@ -159,6 +174,7 @@ def upload_photo():
     entity['logos_detected'] = logo
     entity['best_guess'] = label_web_guess
     entity['number_found'] = length_of
+    entity['text'] = text_lifted
 
 
     # Save the new entity to Datastore.

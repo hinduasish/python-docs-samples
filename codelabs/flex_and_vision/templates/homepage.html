@@ -321,7 +321,7 @@ ul {
 
     {% for image_entity in image_entities %}
     
-        <div class="card" style="width: 400px; margin: 20px" >
+        <div class="card" style="width: 400px; margin: 20px;display: inline-block;" >
   <img src="{{image_entity['image_public_url']}}" width=300 height=400>
   <div class="card-body">
     <h5 class="card-title">Suggested Web Matches: </h5>
@@ -330,8 +330,12 @@ ul {
   <ul class="list-group list-group-flush">
     <li class="list-group-item">Logos Found:{{image_entity['logos_detected']}} </li>
     <li class="list-group-item">Labels Found:{{image_entity['label']}}</li>
-    <li class="list-group-item">VJoy Likelihood for Face: {{image_entity['joy']}}</li>
+    <li class="list-group-item">Smile Detection: {{image_entity['joy']}}</li>
   </ul>
+  <div class="card-body">
+    <h5 class="card-title">Text Found</h5>
+    <p class="card-text">{{image_entity['text']}}</p>
+  </div>
   <div class="card-body">
     <a href="#" class="card-link">Card link</a>
     <a href="#" class="card-link">Another link</a>
