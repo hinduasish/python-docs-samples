@@ -50,8 +50,9 @@ def upload_photo():
     count = 1
     path = "upload" + str(count) + ".png"
     app.logger.info('Info')
+    imgdata = base64.b64decode(image_data)
     with open(path, "ws") as fh:
-        fh.write(image_data.decode('base64'))
+        fh.write(imgdata)
 
     # Create a Cloud Storage client.
     storage_client = storage.Client()
