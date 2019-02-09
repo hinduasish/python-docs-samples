@@ -82,17 +82,27 @@ def upload_photo():
     logo = ""
     if len(logos) > 0:
         for i in logos:
+    
             logo = logo + ", " + i.description
     
     else:
         logo = "No Logos Found"
 
+    logo = [1:]
     response = vision_client.web_detection(image=image)
     annotations = response.web_detection
+
+    label_web_guess = ""
+    
+
     if annotations.web_entities:
-        label_web_guess = annotations.web_entities[0].description
+        
+        for j in annotations.web_entities:
+            label_web_guess = label_web_guess + ", " + j.description
+        label_web_guess = [1:]
     else:
-        label_web_guess = "No web results found"    
+        label_web_guess = "No web results found" 
+
     
     # If a face is detected, save to Datastore the likelihood that the face
     # displays 'joy,' as determined by Google's Machine Learning algorithm.
