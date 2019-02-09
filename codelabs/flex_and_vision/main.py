@@ -119,6 +119,14 @@ def upload_photo():
     else:
         label_web_guess = "No web results found" 
 
+
+    url_similar_image = ""
+    if annotations.visually_similar_images:
+        url_similar_image = annotations.visually_similar_images[0].url
+
+    else:
+        url_similar_image = ""
+
     
     # If a face is detected, save to Datastore the likelihood that the face
     # displays 'joy,' as determined by Google's Machine Learning algorithm.
@@ -175,6 +183,7 @@ def upload_photo():
     entity['best_guess'] = label_web_guess
     entity['number_found'] = length_of
     entity['text'] = text_lifted
+    entity['image_url'] = url_similar_image
 
 
     # Save the new entity to Datastore.
