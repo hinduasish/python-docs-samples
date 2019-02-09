@@ -50,7 +50,7 @@ def upload_photo():
  
     photo = request.files['file']
     
-    random = ''.join([random.choice(string.ascii_letters + string.digits) for n in xrange(5)])
+    random = ''.join([random.choice(string.ascii_letters + string.digits) for n in range(5)])
     new_path = random + photo.filename
     # Create a Cloud Storage client.
     storage_client = storage.Client()
