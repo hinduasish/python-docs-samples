@@ -74,8 +74,21 @@ def upload_photo():
 
     response = vision_client.label_detection(image=image)
     labels = response.label_annotations
-    if len(labels) > 0:
-        label = labels[0].description
+    label = ""
+  
+    if labels:
+        if len(labels) < 5:
+            for j in labels
+                label = label + ", " + j.description
+        else:
+            for i in range(5):
+                label = label + ", " + labels[i].description
+        label = label[1:]
+    else:
+        label = "No labels found" 
+
+
+
 
     response = vision_client.logo_detection(image=image)
     logos = response.logo_annotations
@@ -94,11 +107,14 @@ def upload_photo():
 
     label_web_guess = ""
     
-
+    length_of = len(annotations.web_entities)
     if annotations.web_entities:
-        
-        for j in annotations.web_entities:
-            label_web_guess = label_web_guess + ", " + j.description
+        if len(annotations.web_entities) < 5:
+            for j in annotations.web_entities:
+                label_web_guess = label_web_guess + ", " + j.description
+        else:
+            for i in range(5):
+                label_web_guess = label_web_guess + ", " + annotations.web_entities[i].description
         label_web_guess = label_web_guess[1:]
     else:
         label_web_guess = "No web results found" 
@@ -142,6 +158,8 @@ def upload_photo():
     entity['label'] = label
     entity['logos_detected'] = logo
     entity['best_guess'] = label_web_guess
+    entity['number_found'] = length_of
+
 
     # Save the new entity to Datastore.
     datastore_client.put(entity)
