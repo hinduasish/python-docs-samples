@@ -87,7 +87,7 @@ def upload_photo():
     response = vision_client.web_detection(image=image)
     annotations = response.web_detection
     if annotations.web_entities:
-        label_web_guess = annotations.web_entitiesb[0].description
+        label_web_guess = annotations.web_entities[0].description
     else:
         label_web_guess = "No web results found"    
     
